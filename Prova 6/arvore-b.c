@@ -3,7 +3,7 @@
 #include <string.h>
 
 typedef struct No {
-    int m; //quantidade de chaves armazenadas no n√≥
+    int m; //quantidade de chaves armazenadas no nÛ
     struct No *pai;
     int *s; //array de chaves
     struct No **p; //ponteiro para array de ponteiros para os filhos
@@ -18,7 +18,7 @@ TLista* insere_ordenado (TLista* li, int i) {
     TLista* novo;
     TLista* ant = NULL; /* ponteiro para elemento anterior */
     TLista* p = li; /* ponteiro para percorrer a lista */
-    /* procura posi√ß√£o de inser√ß√£o */
+    /* procura posiÁ„o de inserÁ„o */
     while (p != NULL && p->info < i) {
         ant = p;
         p = p->prox;
@@ -27,7 +27,7 @@ TLista* insere_ordenado (TLista* li, int i) {
     novo = (TLista*) malloc(sizeof(TLista));
     novo->info = i;
     /* encadeia elemento */
-    if (ant == NULL) { /* insere elemento no in√≠cio */
+    if (ant == NULL) { /* insere elemento no inÌcio */
         novo->prox = li; li = novo;
     }
     else { /* insere elemento no meio da lista */
@@ -68,8 +68,8 @@ TNo *libera(TNo *a, int d) {
 }
 
 /*
- * A impressao da √°rvore √© feita como se ela estivesse na vertical ao inv√©s da horizontal, portanto cada n√≥ √© impresso na vertical,
- * com a menor chave do n√≥ na parte inferior do n√≥
+ * A impressao da ·rvore È feita como se ela estivesse na vertical ao invÈs da horizontal, portanto cada nÛ È impresso na vertical,
+ * com a menor chave do nÛ na parte inferior do nÛ
  */
 void imprime_arvore(TNo *a, int nivel) {
     if (a != NULL) {
@@ -97,7 +97,7 @@ void imprime_no(TNo *a) {
 }
 
 /*
- * Busca bin√°ria da posi√ß√£o em que a chave deveria estar dentro do n√≥.
+ * Busca bin·ria da posiÁ„o em que a chave deveria estar dentro do nÛ.
  */
 int posicao(int chave, TNo *no) {
     int inicio = 0;
@@ -115,7 +115,7 @@ int posicao(int chave, TNo *no) {
 }
 
 /*
- * Busca retorna ponteiro para o n√≥ onde a chave est√°, ou onde ela deveria estar (se chegar numa folha e n√£o encontrar a chave)
+ * Busca retorna ponteiro para o nÛ onde a chave est·, ou onde ela deveria estar (se chegar numa folha e n„o encontrar a chave)
  */
 TNo *busca(TNo *no, int chave) {
     int pos = posicao(chave, no);
@@ -129,18 +129,18 @@ TNo *busca(TNo *no, int chave) {
 void particiona(TNo *P, int d, int pos, int chave, TNo *pt);
 
 /*
- * Insere a chave e o seu repectivo ponteiro da direita (para Q) numa posi√ß√£o espec√≠fica de um n√≥ espec√≠fico da √°rvore
- * d √© a ordem da arvore
- * Caso a posi√ß√£o n√£o seja informada (-1) o algoritmo busca pela posi√ß√£o correta
- * Retorna ponteiro para a raiz da √°rvore
+ * Insere a chave e o seu repectivo ponteiro da direita (para Q) numa posiÁ„o especÌfica de um nÛ especÌfico da ·rvore
+ * d È a ordem da arvore
+ * Caso a posiÁ„o n„o seja informada (-1) o algoritmo busca pela posiÁ„o correta
+ * Retorna ponteiro para a raiz da ·rvore
  */
 void insere(TNo *no, int d, int pos, int chave, TNo *pt) {
     if (pos == -1) {
         pos = posicao(chave, no);
     }
 
-    if (no->m < 2 * d) { // Tem espa√ßo no n√≥, ent√£o pode inserir diretamente
-        for (int i = no->m; i > pos; i--) { // Abre espa√ßo para a inser√ß√£o
+    if (no->m < 2 * d) { // Tem espaÁo no nÛ, ent„o pode inserir diretamente
+        for (int i = no->m; i > pos; i--) { // Abre espaÁo para a inserÁ„o
             no->s[i] = no->s[i - 1];
             no->p[i + 1] = no->p[i];
         }
@@ -150,24 +150,24 @@ void insere(TNo *no, int d, int pos, int chave, TNo *pt) {
             pt->pai = no;
         }
         no->m++;
-    } else { // N√≥ est√° cheio -- √© necess√°rio particionar
+    } else { // NÛ est· cheio -- È necess·rio particionar
         particiona(no, d, pos, chave, pt);
     }
 }
 
 /*
- * Insere a chave numa folha da √°rvore
- * raiz √© ponteiro para a raiz da √°rvore
- * d √© a ordem da arvore
- * Retorna ponteiro para a raiz da √°rvore
+ * Insere a chave numa folha da ·rvore
+ * raiz È ponteiro para a raiz da ·rvore
+ * d È a ordem da arvore
+ * Retorna ponteiro para a raiz da ·rvore
  */
 TNo *insere_folha(TNo *raiz, int d, int chave) {
     if (raiz != NULL) {
         TNo *no = busca(raiz, chave);
         int pos = posicao(chave, no);
-        if (pos == no->m || chave != no->s[pos]) { // chave n√£o existe no n√≥
+        if (pos == no->m || chave != no->s[pos]) { // chave n„o existe no nÛ
             insere(no, d, pos, chave, NULL);
-            if (raiz->pai != NULL) { // Inser√ß√£o riou uma nova raiz
+            if (raiz->pai != NULL) { // InserÁ„o riou uma nova raiz
                 raiz = raiz->pai;
             }
         }
@@ -180,9 +180,9 @@ TNo *insere_folha(TNo *raiz, int d, int chave) {
 }
 
 /*
- * Particiona o n√≥ P para adicionar a chave e o ponteiro pt
- * Ap√≥s o final da execu√ß√£o dessa fun√ß√£o, a chave ter√° sido inserida no local correto
- * e um novo n√≥ Q ter√° sido criado como resultado do particionamento
+ * Particiona o nÛ P para adicionar a chave e o ponteiro pt
+ * ApÛs o final da execuÁ„o dessa funÁ„o, a chave ter· sido inserida no local correto
+ * e um novo nÛ Q ter· sido criado como resultado do particionamento
  * Uma nova raiz W pode ser criada, se a raiz atual estiver sendo particionada
  */
 void particiona(TNo *P, int d, int pos, int chave, TNo *pt) {
@@ -209,11 +209,11 @@ void particiona(TNo *P, int d, int pos, int chave, TNo *pt) {
     // Processa P
     if (pos <= d) {
         P->m = d;
-        insere(P, d, pos, chave, pt); // inser√ß√£o vai fazer o n√∫mero de chaves aumentar para d+1, e isso √© tratado no final dessa fun√ß√£o
+        insere(P, d, pos, chave, pt); // inserÁ„o vai fazer o n˙mero de chaves aumentar para d+1, e isso È tratado no final dessa funÁ„o
     }
 
     // Processa W
-    if (P->pai == NULL) { // Caso o n√≥ seja raiz, cria o n√≥ superior
+    if (P->pai == NULL) { // Caso o nÛ seja raiz, cria o nÛ superior
         TNo *W = cria(d);
         W->p[0] = P;
         P->pai = W;
@@ -222,50 +222,26 @@ void particiona(TNo *P, int d, int pos, int chave, TNo *pt) {
     insere(P->pai, d, -1, P->s[d], Q);
     // Ajusta o ponteiro da esquerda de Q (recebe ponteiro da direita da chave que subiu para o pai W)
     Q->p[0] = P->p[d+1];
-    // A inser√ß√£o da chave d em W fez o n√∫mero de chaves de P diminuir para D
+    // A inserÁ„o da chave d em W fez o n˙mero de chaves de P diminuir para D
     P->m = d;
 }
-
-// TLista *menor_k(TNo *raiz, int k) {
-//     TLista *lista = (TLista *) malloc(sizeof (TLista));
-//     if (raiz != NULL) {
-//         TNo *no = busca(raiz, k);
-//         int pos = posicao(k, no);
-//         if (pos < no->m && k == no->s[pos]) { 
-//             for (int i = 0; i < (no->m)*2; i++) {
-//                 if (no->s[i] < k) {
-//                     lista = insere_ordenado(lista, no->s[i]);
-//                 }
-//             }
-//         }
-//     }
-//     return lista;]
-// }
-
-// typedef struct No {
-//     int m; //quantidade de chaves armazenadas no n√≥
-//     struct No *pai;
-//     int *s; //array de chaves
-//     struct No **p; //ponteiro para array de ponteiros para os filhos
-// } TNo;
 
 TLista *recursiva(TNo *raiz, int k, TLista *lista) {
     if (raiz != NULL) {
         int i;
         for (i = 0; i < raiz->m; i++) {
-            if (raiz->s[i] < k) {
+            if (raiz->s[i] < k) {  
                 lista = insere_ordenado(lista, raiz->s[i]);
-                lista = recursiva(raiz->p[i], k, lista);
             }   
+             lista = recursiva(raiz->p[i], k, lista);
         }
-        i++;
         lista = recursiva(raiz->p[i], k, lista);
     }
     return lista;
 }
 
 TLista *menor_k(TNo *raiz, int k) {
-    TLista *lista = (TLista *) malloc(sizeof (TLista));
+    TLista *lista = NULL;
     lista = recursiva(raiz, k, lista);
     return lista;
 }
@@ -283,8 +259,8 @@ int main(int argc, char *argv[]) {
     char *ptr;
     int valor;
 
-    /* l√™ valores para criar a arvore
-     * valores devem ser informados separados por tra√ßo
+    /* lÍ valores para criar a arvore
+     * valores devem ser informados separados por traÁo
      * exemplo: 1-3-5-2-7-9-21-6 */
     scanf("%s", l);
     //quebra a string de entrada
@@ -302,4 +278,3 @@ int main(int argc, char *argv[]) {
     TLista *lista = menor_k(raiz, k);
     imprime_lista(lista);
 }
-
